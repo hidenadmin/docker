@@ -1,0 +1,28 @@
+version: '2'
+services:
+  db:
+    image: mysql
+    networks:
+      - app1
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    networks:
+      - app1
+    ports:
+      - 8080:80
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+
+  php:
+    image: myphp2
+    networks:
+      - app1
+    ports:
+      - 80:80
+    volumes:
+      - /var/lib/docker/volumes/test1/_data:/var/www/html/test1/
+networks:
+    app1:
